@@ -6,7 +6,8 @@ from sklearn.preprocessing import StandardScaler
 from keras.utils import Sequence, to_categorical
 
 # NOTE:
-# these data generators work for small-medium size datasets under no memory constraints, eg RAM 32GB or more.
+# these data generators work for small-medium size datasets under no memory constraints, 
+# eg RAM 32GB or more.
 # If used with smaller RAMs, a slightly different approach for feeding the net may be needed.
 
 

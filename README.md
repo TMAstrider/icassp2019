@@ -4,7 +4,7 @@
 This repository contains the code corresponding to the following <a href="https://arxiv.org/abs/1901.01189" target="_blank">ICASSP 2019 paper</a>. If you use this code or part of it, please cite:
 
 >Eduardo Fonseca, Manoj Plakal, Daniel P. W. Ellis, Frederic Font, Xavier Favory, Xavier Serra, "Learning Sound Event Classifiers from Web Audio with Noisy Labels", In proceedings of ICASSP 2019, Brighton, UK
-
+****
 The framework comprises all the basic stages: feature extraction, training, inference and evaluation. After loading the FSDnoisy18k dataset, log-mel energies are computed and a CNN baseline is trained and evaluated. The code also allows to test four noise-robust loss functions. Please check our paper for more details. The system is implemented in Keras and TensorFlow.
 
 The FSDnoisy18k dataset described in our ICASSP 2019 paper is available through Zenodo from its companion site: <a href="http://www.eduardofonseca.net/FSDnoisy18k/" target="_blank">http://www.eduardofonseca.net/FSDnoisy18k/</a>. 

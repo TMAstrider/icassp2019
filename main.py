@@ -34,15 +34,18 @@ from losses import lq_loss_wrap, crossentropy_max_wrap, crossentropy_outlier_wra
     crossentropy_max_origin_wrap, crossentropy_outlier_origin_wrap, lq_loss_origin_wrap, crossentropy_reed_origin_wrap
 
 
+#
+# 记录开始时间
+#
 start = time.time()
 
 now = datetime.datetime.now()
 print("Current date and time:")
 print(str(now))
 
-# =========================================================================================================
+# ================================参数解析
 
-# ==================================================================== ARGUMENTS
+# ================================= ARGUMENTS
 parser = argparse.ArgumentParser(description='Code for ICASSP2019 paper Learning Sound Event Classifiers from Web Audio'
                                              ' with Noisy Labels')
 parser.add_argument('-p', '--params_yaml',
@@ -58,7 +61,7 @@ print('\nYaml file with parameters defining the experiment: %s\n' % str(args.par
 # =========================================================================Parameters, paths and variables
 # =========================================================================Parameters, paths and variables
 
-# Read parameters file from yaml passed by argument
+# 从 yaml 加载参数
 params = yaml.load(open(args.params_yaml))
 params_ctrl = params['ctrl']
 params_extract = params['extract']
@@ -401,9 +404,9 @@ if params_ctrl.get('learn'):
                                callbacks=callback_list)
 
 
-# ==================================================================================================== PREDICT
-# ==================================================================================================== PREDICT
-# ==================================================================================================== PREDICT
+# ============================================================================== PREDICT
+# ============================================================================== PREDICT
+# ============================================================================== PREDICT
 
 print('\nCompute predictions on test set:==================================================\n')
 

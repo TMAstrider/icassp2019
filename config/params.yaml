@@ -2,7 +2,7 @@ ctrl:
   feat_ext: true
   learn: true
   train_data: all
-  dataset_path: '/data/FSDnoisy18k/'
+  dataset_path: '../fsd18kdataset/FSDnoisy18k/'
 extract:
   audio_len_s: 2
   eps: 2.220446049250313e-16
@@ -21,7 +21,7 @@ extract:
   spectrogram_type: power
   win_length_samples: 1764
 learn:
-  batch_size: 64
+  batch_size: 32
   lr: 0.001
   n_classes: 20
   n_epochs: 160
@@ -39,3 +39,17 @@ recognizer:
 suffix:
   in: _mel
   out: _label
+paths:
+  
+  pretrained: './pretrained_model.pth'
+  checkpoint: './checkpoint.pth'
+
+  train_csv: '../fsd18kdataset/FSDnoisy18k.meta/train.csv'
+  test_csv: '../fsd18kdataset/FSDnoisy18k.meta/test.csv'
+
+  test_audio_input: '../fsd18kdataset/FSDnoisy18k.audio_test'
+  train_audio_input: '../fsd18kdataset/FSDnoisy18k.audio_train'
+
+  train_feature_extracted: '../features/audio_train_varup2'
+  test_feature_extracted: '../features/audio_test_varup2'
+  
