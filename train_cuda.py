@@ -325,7 +325,7 @@ print('\nloading optimizer and loss function...')
 # 定义优化器和损失函数
 optimizer = torch.optim.Adam(
     model.parameters(),
-    lr=1e-3,
+    lr=1e-2,
     weight_decay=1e-3  # L2正则化
 )
 criterion = nn.CrossEntropyLoss()
@@ -444,6 +444,6 @@ def train(model, loader, optimizer, criterion, epochs=160):
 print('training started...')
 
 # 开始训练
-train(model, train_loader, optimizer, criterion)
+train(model, train_loader, optimizer, criterion, params_learn['n_epochs'])
 
 

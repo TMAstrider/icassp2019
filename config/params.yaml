@@ -24,7 +24,7 @@ learn:
   batch_size: 32
   lr: 0.001
   n_classes: 20
-  n_epochs: 160
+  n_epochs: 220
   optim: Adam
   patience: 15
   val_split: 0.15
