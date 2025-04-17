@@ -49,13 +49,52 @@ def modify_file_variable_length(data=None, input_fixed_length=0, params_extract=
     """
 
     if params_extract.get('load_mode') == 'varup':
+        # 获取关键参数
+        n_fft = int(params_extract['n_fft'])
+        hop_length = int(params_extract['hop_length_samples'])
+        num_frames = len(data)
+        
+        # print(n_fft)
+        # print(hop_length)
+        # print(num_frames)
+        # 计算当前能产生的时间步数
+        time_steps = (num_frames - n_fft) // hop_length + 1
+
         # deal with short sounds
-        if len(data) < input_fixed_length:
+        num_frames = len(data)
+
+        # 计算最小所需音频长度：确保至少能生成1个时间步
+        # min_audio_length = params_extract['patch_len'] * params_extract['hop_length_samples']  # 假设n_fft为2048
+
+        target_time_steps = 150
+
+         # 计算目标音频长度
+        target_length2 = (target_time_steps - 1) * hop_length + n_fft
+        target_length1 = (100 - 1) * hop_length + n_fft
+        # print(f'num_frames:{num_frames}, target_length1:{target_length1}, target_length2:{target_length2}')
+
+        if num_frames < target_length1:
+            # 计算需要复制的次数
+            num_repeats = int(np.ceil(target_length2 / num_frames))
+            extended_data = np.tile(data, (num_repeats, 1))
+            
+            # 截取到目标长度
+            data = extended_data[:target_length2]
+            # print(f"[Replicate] {num_frames} -> {target_length2} samples ({target_time_steps} steps)")
+        
             # if file shorter than input_length, replicate the sound to reach the input_fixed_length
-            nb_replicas = int(np.ceil(input_fixed_length / len(data)))
-            # replicate according to column
-            data_rep = np.tile(data, (nb_replicas, 1))
-            data = data_rep[:input_fixed_length]
+            # nb_replicas = int(np.ceil(input_fixed_length / num_frames))
+            # # replicate according to column
+            # data_rep = np.tile(data, (nb_replicas, 1))
+            # data = data_rep[:2 * input_fixed_length]
+
+            # print(f"Data padded to shape: {data.shape}")  # 打印补齐后的形状
+
+        elif num_frames >= input_fixed_length:
+         # 如果帧数超出，裁剪到 input_fixed_length 的整数倍
+            num_patches = num_frames // input_fixed_length  # 计算可以生成的完整补丁数量
+            data = data[:num_patches * input_fixed_length]  # 裁剪到整数倍长度
+            # print(f"Data trimmed to shape: {data.shape}")  # 打印裁剪后的形状
 
     return data
 

@@ -137,6 +137,7 @@ class DataGeneratorPatch(Sequence):
         mel_spec = utils.load_tensor(in_path=os.path.join(self.feature_dir, self.file_list[f_id]))
         label = utils.load_tensor(in_path=os.path.join(self.feature_dir,
                                                        self.file_list[f_id].replace(self.suffix_in, self.suffix_out)))
+        # print(f"Mel spectrogram shape: {mel_spec.shape}")  # 打印梅尔频谱图的形状
 
         # indexes to store patches in self.features, according to the nb of instances from the file
         idx_start = self.nb_inst_cum[f_id]      # start for a given file
@@ -148,6 +149,7 @@ class DataGeneratorPatch(Sequence):
         start = 0  # starting frame within f_id for each T-F patch
         while idx < (idx_end - idx_start):
             self.features[idx_start + idx] = mel_spec[start: start + self.patch_len]
+            # print(f"self.features{idx + 1} shape: {self.features.shape}")  # 打印每个补丁的形状
             # update indexes
             start += self.patch_hop
             idx += 1

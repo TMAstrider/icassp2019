@@ -2,7 +2,7 @@ ctrl:
   feat_ext: true
   learn: true
   train_data: all
-  dataset_path: '../fsd18kdataset/FSDnoisy18k/'
+  dataset_path: '../../fsd18kdataset'
 extract:
   audio_len_s: 2
   eps: 2.220446049250313e-16
@@ -40,16 +40,18 @@ suffix:
   in: _mel
   out: _label
 paths:
-  
+
   pretrained: './pretrained_model.pth'
   checkpoint: './checkpoint.pth'
+  
+  dataset_path: '../../fsd18kdataset'
 
-  train_csv: '../fsd18kdataset/FSDnoisy18k.meta/train.csv'
-  test_csv: '../fsd18kdataset/FSDnoisy18k.meta/test.csv'
+  train_csv: '../../fsd18kdataset/FSDnoisy18k.meta/train.csv'
+  test_csv: '../../fsd18kdataset/FSDnoisy18k.meta/test.csv'
 
-  test_audio_input: '../fsd18kdataset/FSDnoisy18k.audio_test'
-  train_audio_input: '../fsd18kdataset/FSDnoisy18k.audio_train'
+  test_audio_input: '../../fsd18kdataset/FSDnoisy18k.audio_test'
+  train_audio_input: '../../fsd18kdataset/FSDnoisy18k.audio_train'
 
-  train_feature_extracted: '../features/audio_train_varup2'
-  test_feature_extracted: '../features/audio_test_varup2'
+  train_feature_extracted: '../../features/audio_train_varup2'
+  test_feature_extracted: '../../features/audio_test_varup2'
   
