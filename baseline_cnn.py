@@ -78,12 +78,11 @@ class BaselineCNN(nn.Module):
         return x  # 输出logits，训练时配合CrossEntropyLoss使用
 
 
-# 使用示例
+
 if __name__ == '__main__':
     # 参数设置
-    params_extract = {'patch_len': 100, 'n_mels': 96}  # 示例值
-    params_learn = {'n_classes': 20}  # 示例值
-
+    params_extract = {'patch_len': 100, 'n_mels': 96}
+    params_learn = {'n_classes': 20}
 
     # 创建模型
     model = BaselineCNN(
@@ -92,7 +91,10 @@ if __name__ == '__main__':
         n_classes=params_learn['n_classes']
     )
 
-    # 测试输入
+    # 保存整个模型
+    torch.save(model, 'baseline_cnn_full.pth')
+    print("模型已保存为 baseline_cnn_full.pth")
+    
     dummy_input = torch.randn(4, 1, params_extract['patch_len'], params_extract['n_mels'])
     output = model(dummy_input)
     print(f"Input shape: {dummy_input.shape}")
