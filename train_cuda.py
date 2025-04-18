@@ -30,7 +30,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 print(f"Using device: {device}\n")
 
-with open('config/params.yaml', 'r') as file:
+with open('config/params_server.yaml', 'r') as file:
     config = yaml.safe_load(file)
 params_extract = config['extract']
 params_learn = config['learn']
