@@ -165,11 +165,11 @@ filelist_audio_te = test_csv.fname.values.tolist()
 
 # get positions of manually_verified clips: separate between CLEAN and NOISY sets
 filelist_audio_tr_flagveri = train_csv.manually_verified.values.tolist()
-idx_flagveri = [i for i, x in enumerate(filelist_audio_tr_flagveri) if x == 1]
-idx_flagnonveri = [i for i, x in enumerate(filelist_audio_tr_flagveri) if x == 0]
+clean_set = [i for i, x in enumerate(filelist_audio_tr_flagveri) if x == 1]
+noisy_set = [i for i, x in enumerate(filelist_audio_tr_flagveri) if x == 0]
 
 # create list of ids that come from the noisy set
-noisy_ids = [int(filelist_audio_tr[i].split('.')[0]) for i in idx_flagnonveri]
+noisy_ids = [int(filelist_audio_tr[i].split('.')[0]) for i in noisy_set]
 params_learn['noisy_ids'] = noisy_ids
 
 # get positions of clips of noisy_small subset
@@ -303,11 +303,11 @@ if params_ctrl.get('train_data') == 'all':
 
 elif params_ctrl.get('train_data') == 'clean':
     # only files (not path), feature file list for tr, only those that are manually verified: CLEAN SET
-    ff_list_tr = [filelist_audio_tr[i].replace('.wav', suffix_in + '.data') for i in idx_flagveri]
+    ff_list_tr = [filelist_audio_tr[i].replace('.wav', suffix_in + '.data') for i in clean_set]
 
 elif params_ctrl.get('train_data') == 'noisy':
     # only files (not path), feature file list for tr, only those that are NOT verified: NOISY SET
-    ff_list_tr = [filelist_audio_tr[i].replace('.wav', suffix_in + '.data') for i in idx_flagnonveri]
+    ff_list_tr = [filelist_audio_tr[i].replace('.wav', suffix_in + '.data') for i in noisy_set]
 
 elif params_ctrl.get('train_data') == 'noisy_small':
     # only files (not path), feature file list for tr, only a small portion of the NOISY SET

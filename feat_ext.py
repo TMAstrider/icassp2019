@@ -80,6 +80,7 @@ def modify_file_variable_length(data=None, input_fixed_length=0, params_extract=
             
             # 截取到目标长度
             data = extended_data[:target_length2]
+            
             # print(f"[Replicate] {num_frames} -> {target_length2} samples ({target_time_steps} steps)")
         
             # if file shorter than input_length, replicate the sound to reach the input_fixed_length
@@ -97,6 +98,27 @@ def modify_file_variable_length(data=None, input_fixed_length=0, params_extract=
             # print(f"Data trimmed to shape: {data.shape}")  # 打印裁剪后的形状
 
     return data
+
+
+# def modify_file_variable_length(data=None, input_fixed_length=0, params_extract=None):
+#     """
+
+#     :param data:
+#     :param input_fixed_length:
+#     :param params_extract:
+#     :return:
+#     """
+
+#     if params_extract.get('load_mode') == 'varup':
+#         # deal with short sounds
+#         if len(data) < input_fixed_length:
+#             # if file shorter than input_length, replicate the sound to reach the input_fixed_length
+#             nb_replicas = int(np.ceil(input_fixed_length / len(data)))
+#             # replicate according to column
+#             data_rep = np.tile(data, (nb_replicas, 1))
+#             data = data_rep[:input_fixed_length]
+
+#     return data
 
 
 def get_normalized_audio(y, head_room=0.005):

@@ -14,7 +14,7 @@ class BaselineCNN(nn.Module):
         self.conv1 = nn.Sequential(
             nn.BatchNorm2d(1),
             nn.ReLU(),
-            nn.Conv2d(1, 24, kernel_size=5, padding=2),
+            nn.Conv2d(1, 24, kernel_size=(5, 5), padding='same'),
             nn.BatchNorm2d(24),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=(4, 2))
@@ -24,7 +24,7 @@ class BaselineCNN(nn.Module):
         self.conv2 = nn.Sequential(
             nn.BatchNorm2d(24),
             nn.ReLU(),
-            nn.Conv2d(24, 48, kernel_size=5, padding=2),
+            nn.Conv2d(24, 48, kernel_size=(5, 5), padding='same'),
             nn.BatchNorm2d(48),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=(4, 2))
@@ -34,7 +34,7 @@ class BaselineCNN(nn.Module):
         self.conv3 = nn.Sequential(
             nn.BatchNorm2d(48),
             nn.ReLU(),
-            nn.Conv2d(48, 48, kernel_size=5, padding=2),
+            nn.Conv2d(48, 48, kernel_size=(5, 5), padding=2),
             nn.BatchNorm2d(48),
             nn.ReLU()
         )

@@ -75,6 +75,11 @@ class DataGeneratorPatch(Sequence):
         """
         Return the number of context_windows, patches, or instances generated out of a given file
         """
+        # shape = utils.get_shape(os.path.join(f_name.replace('.data', '.shape')))
+        # file_frames = float(shape[0])
+        # return np.maximum(1, int(np.ceil((file_frames - self.patch_len) / self.patch_hop)))
+
+        # copy
         shape = utils.get_shape(os.path.join(f_name.replace('.data', '.shape')))
         file_frames = float(shape[0])
         return np.maximum(1, int(np.ceil((file_frames - self.patch_len) / self.patch_hop)))
@@ -96,14 +101,17 @@ class DataGeneratorPatch(Sequence):
         """
         assert os.path.isdir(os.path.dirname(feature_dir)), "path to feature directory does not exist"
         print('Loading self.features...')
-        # list of file names containing features
+
+        # list of file names containing features 检查同时存在mel and label 的文件
         self.file_list = [f for f in file_list if f.endswith(self.suffix_in + '.data') and
                           os.path.isfile(os.path.join(feature_dir, f.replace(self.suffix_in, self.suffix_out)))]
 
+        # 符合条件的文件数量
         self.nb_files = len(self.file_list)
         assert self.nb_files > 0, "there are no features files in the feature directory"
         self.feature_dir = feature_dir
 
+        # time frequency patches per file
         # For all set, cumulative sum of instances (or T_F patches) per file
         self.nb_inst_cum = np.cumsum(np.array(
             [0] + [self.get_num_instances_per_file(os.path.join(self.feature_dir, f_name))
@@ -155,6 +163,10 @@ class DataGeneratorPatch(Sequence):
             idx += 1
 
         self.labels[idx_start: idx_end] = label[0]
+
+        # check the file-label mapping
+        print(f"File {self.file_list[f_id]} processed.")
+        print(f'\nlabel: {self.labels[idx_start: idx_end]}')
 
     def __len__(self):
         return self.nb_iterations
