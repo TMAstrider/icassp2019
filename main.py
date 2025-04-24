@@ -410,7 +410,6 @@ if params_ctrl.get('learn'):
 
 print('\nCompute predictions on test set:==================================================\n')
 
-list_preds = []
 
 te_files = [f for f in os.listdir(params_path.get('featurepath_te')) if f.endswith(suffix_in + '.data')]
 # to store predictions

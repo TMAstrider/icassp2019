@@ -28,6 +28,7 @@ learn:
   optim: Adam
   patience: 15
   val_split: 0.15
+  predict_agg: gmean
 loss:
   l_loss: 1.9
   m_loss: 0.6
